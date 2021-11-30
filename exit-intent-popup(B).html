@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <style>
+
+         .exit-intent-popup {
+        font-family: 'Roboto-bold', sans-serif;
+         color: #495F97;
+         position: fixed;
+         z-index: 1;
+         width: 100%;
+         height: 100%;
+         top: 0;
+         left: 0;
+         background-color: rgba(73, 95, 151, 0.7);
+         transform: translateY(60%) scale(0);
+         transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+         }
+         .exit-intent-popup.visible {
+         transform: translateY(0) scale(1);
+         }
+         .blog-direct {
+         position: absolute;
+         padding: 10px;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         background-image:     url("https://images.unsplash.com/uploads/141103282695035fa1380/95cdfeef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1730&q=80");
+         background-repeat: no-repeat;
+         background-position: center;
+         background-size: 1100px 650px;
+         background-color: #cccccc;
+         border-radius: 1%;
+         width: 1000px;
+         height: 600px;
+         }
+         h2, .box p {
+         position: absolute;
+         text-align: center;
+         margin: auto;
+         padding: 10px;
+         top: 50%;
+         left: 77%;
+         padding: 70px 10px;
+         transform: translate(-80%, -65%);
+         }
+         h3, .box p {
+         position: absolute;
+         text-align: center;
+         margin: auto;
+         padding: 10px;
+         top: 70%;
+         left: 77%;
+         padding: 70px 0;
+         transform: translate(-80%, -50%);
+         }
+         p, .box p {
+         position: absolute;
+         text-align: center;
+         margin: auto;
+         padding: 10px;
+         top: 60%;
+         left: 77%;
+         transform: translate(-80%, -35%);
+         }
+         .exit {
+         position: absolute;
+         padding: 10px;
+         top: 85%;
+         left: 85%;
+         transform: translate(-110%, -80%);
+         border-style: solid;
+         border-color: #495F97;
+         border-radius: 6%;
+         border-width: 2px;
+         }
+         .progress {
+         position: absolute;
+         padding: 10px;
+         top: 85%;
+         left: 70%;
+         transform: translate(-100%, -80%);
+         border-style: solid;
+         border-color: #495F97;
+         border-radius: 6%;
+         background-color: white;
+         }
+         a:link {
+         color: #495F97;
+         text-decoration: none;
+         }
+         a:visited {
+         text-decoration: none;
+         }
+         a:hover {
+         color: white;
+         background-color: #495F97;
+         }
+</style>
+   </head>
+
+   <div class="exit-intent-popup" >
+    <div class="blog-direct">
+        <div>
+            <h2>INTERESTED IN A MORE SUSTAINABLE APPROACH TO DATA?</h2>
+            <p>explore the impact on consumer trust and the environment below 
+  </p>
+            <h3><u>FIND OUT MORE BELOW!</u></h3>
+        </div>
+        <div>
+            <a href="https://www.merkleinc.com/emea/thought-leadership/white-papers/big-data-sustainable-data-achieving-more-valuable-outcomes-whilst" class="progress"><b>YES PLEASE!</b></a>
+            <a href="#" class="exit">NO THANKS</a>
+        </div>
+     </div>
+</div>
+
+        <script>
+		// utility function to get a cookie by name
+        function getCookie (name) {
+            let value = `; ${document.cookie}`;
+            let parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+		// when the page has loaded..
+         window.onload = function() {
+
+            // add exit event to pop up
+            document.querySelector('.exit-intent-popup').addEventListener('click', function() {
+                document.querySelector('.exit-intent-popup').classList.remove('visible');
+            });
+
+            // on document mouse out (exit intent)
+            document.addEventListener("mouseleave", function(e){
+				// if mouse is above page
+                if( e.clientY < 0 )
+                {
+					// get the lightbox shown cookie value
+                    let lightBoxShown = getCookie('lightBoxShown');
+					// if the value has not been set (no cookie exists)
+                    if (typeof (lightBoxShown) === 'undefined') {
+						// show the exit intent popup
+                        document.querySelector('.exit-intent-popup').classList.add('visible');
+						// add the cookie
+                        document.cookie = `lightBoxShown=1; path=/; max-age=${60 * 60 * 24 * 14};`;
+                    }
+                }
+            }, false);
+         }
+      </script>
+   </body>
+</html>
